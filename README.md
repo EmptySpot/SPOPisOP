@@ -21,3 +21,19 @@ We hebben ook nog de twee tabellen Brands en Categorie dit is om producten in gr
 Brands bevat alleen “Brand” als primaire sleutel dit maakt het ook makkelijk als een bedrijf zijn naam verandert kan je gelijk voor alle producten de naam veranderen.  Categorie bevat als primaire sleutel “categorie”(category) en “subcategorie” (subcategorie) en “subsubcategorie”             (subsubcategorie) dit met drie soorten categorieën kan je beter specificeren welke producten het meest op elkaar lijken.  
 
 *Afbeeldingen zijn verdwenen toen we het naar git verplaatsen
+
+*Hierna volgt de code voor in MySQL de correcte tables te maken, kies enkel nog wel in welke database je dit wilt hebben.
+
+CREATE TABLE Besteld (SessionsSession_id char(255) NOT NULL, ProductsProduct_id int(255) NOT NULL);
+CREATE TABLE Brands (Brand_name char(255) NOT NULL, PRIMARY KEY (Brand_name));
+CREATE TABLE Buids (Buids char(255) NOT NULL, ProfilesProfiles_id char(255) NOT NULL, PRIMARY KEY (Buids));
+CREATE TABLE Categorie (Categorie char(255) NOT NULL, Subcategorie char(255), Subsubcategorie char(255), PRIMARY KEY (Categorie));
+CREATE TABLE Products (Product_id int(255) NOT NULL AUTO_INCREMENT, Product_name char(255) NOT NULL, Gender char(255), Prijs int(11) NOT NULL, BrandsBrands char(255) NOT NULL, CategorieCategorie char(255) NOT NULL, PRIMARY KEY (Product_id));
+CREATE TABLE Profiles (Profiles_id char(255) NOT NULL, PRIMARY KEY (Profiles_id));
+CREATE TABLE Sessions (Session_id char(255) NOT NULL, BuidsBuids char(255) NOT NULL, PRIMARY KEY (Session_id));
+ALTER TABLE Sessions ADD CONSTRAINT FKSessions485302 FOREIGN KEY (BuidsBuids) REFERENCES Buids (Buids);
+ALTER TABLE Products ADD CONSTRAINT FKProducts329484 FOREIGN KEY (BrandsBrands) REFERENCES Brands (Brand_name);
+ALTER TABLE Products ADD CONSTRAINT FKProducts830464 FOREIGN KEY (CategorieCategorie) REFERENCES Categorie (Categorie);
+ALTER TABLE Buids ADD CONSTRAINT FKBuids241977 FOREIGN KEY (ProfilesProfiles_id) REFERENCES Profiles (Profiles_id);
+ALTER TABLE Besteld ADD CONSTRAINT FKBesteld780638 FOREIGN KEY (SessionsSession_id) REFERENCES Sessions (Session_id);
+ALTER TABLE Besteld ADD CONSTRAINT FKBesteld612044 FOREIGN KEY (ProductsProduct_id) REFERENCES Products (Product_id);
